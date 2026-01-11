@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gloria Cloud | Digital Agency</title>
-    <meta name="description" content="Gloria Cloud - Premium Web Design, Branding, and Digital Services." />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gloria Cloud | Digital Agency</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="description" content="Gloria Cloud - Premium Web Design, Branding, and Digital Services." />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9', // Sky 500
+              600: '#0284c7', // Sky 600
+              900: '#0c4a6e', // Sky 900
             },
-            colors: {
-              primary: {
-                50: '#f0f9ff',
-                100: '#e0f2fe',
-                500: '#0ea5e9', // Sky 500
-                600: '#0284c7', // Sky 600
-                900: '#0c4a6e', // Sky 900
-              },
-              accent: {
-                500: '#6366f1', // Indigo 500
-                600: '#4f46e5', // Indigo 600
-              }
+            accent: {
+              500: '#6366f1', // Indigo 500
+              600: '#4f46e5', // Indigo 600
             }
           }
         }
       }
-    </script>
-    <style>
-      /* Smooth scrolling for anchor links if needed */
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-    </style>
+    }
+  </script>
+  <style>
+    /* Smooth scrolling for anchor links if needed */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -54,10 +60,12 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-slate-50 text-slate-800">
-    <div id="root"></div>
+
+<body class="bg-slate-50 text-slate-800">
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>
