@@ -37,7 +37,7 @@ const About: React.FC = () => {
           <div className="w-full md:w-1/2">
             <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Story</h2>
             <p className="text-slate-600 mb-4 leading-relaxed">
-              Founded in 2020, Gloria Cloud began with a simple mission: to bridge the gap between complex technology and intuitive design—and to do it in a way that glorifies God. As an AI-driven company, we combine human creativity with intelligent tools to deliver technical excellence and strong design, efficiently and with care.
+              Founded in 2022, Gloria Cloud began with a simple mission: to bridge the gap between complex technology and intuitive design—and to do it in a way that glorifies God. As an AI-driven company, we combine human creativity with intelligent tools to deliver technical excellence and strong design, efficiently and with care.
             </p>
             <p className="text-slate-600 mb-6 leading-relaxed">
               Today we run a full-service digital agency, partnering with businesses to transform their digital presence. We believe that a website isn't just code and pixels—it's the heart of your modern business. In everything we build, we aim to honor God and serve others with excellence.
