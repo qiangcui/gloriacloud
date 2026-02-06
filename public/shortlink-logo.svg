@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="120" fill="url(#bg)" rx="12"/>
+  <!-- Chain link icon (two interlocked links) -->
+  <g transform="translate(40, 30)">
+    <path d="M28 20c0-4.4-3.6-8-8-8h-4c-2.2 0-4.2.9-5.6 2.3l-2.3 2.3c-.9.9-.9 2.5 0 3.4l2.3 2.3C14.8 22.9 16.8 24 19 24h4c4.4 0 8-3.6 8-8zm-8 24c-4.4 0-8 3.6-8 8s3.6 8 8 8h4c2.2 0 4.2-.9 5.6-2.3l2.3-2.3c.9-.9.9-2.5 0-3.4l-2.3-2.3C27.2 49.1 25.2 48 23 48h-4z" fill="#a78bfa"/>
+    <path d="M12 44c0 4.4 3.6 8 8 8h4c2.2 0 4.2-.9 5.6-2.3l2.3-2.3c.9-.9.9-2.5 0-3.4l-2.3-2.3C25.2 37.1 23.2 36 21 36h-4c-4.4 0-8 3.6-8 8zm16-24c2.2 0 4.2.9 5.6 2.3l2.3 2.3c.9.9.9 2.5 0 3.4l-2.3 2.3C27.2 30.9 25.2 32 23 32h-4c-4.4 0-8-3.6-8-8s3.6-8 8-8h4z" fill="#a78bfa"/>
+  </g>
+  <!-- Short text (lighter) -->
+  <text x="115" y="72" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="600" fill="#e2e8f0">Short</text>
+  <!-- Link text (purple) -->
+  <text x="195" y="72" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="600" fill="#a78bfa">Link</text>
+</svg>

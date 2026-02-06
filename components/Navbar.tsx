@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Cloud } from 'lucide-react';
-import { NavLink } from '../types';
+import { useLanguage } from '../contexts/LanguageContext';
+import type { Lang } from '../constants/translations';
 
-const navLinks: NavLink[] = [
-  { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
-  { name: 'Services', path: '/services' },
-  { name: 'Portfolio', path: '/portfolio' },
-  { name: 'Contact', path: '/contact' },
+const navItems: { path: string; key: 'home' | 'about' | 'services' | 'portfolio' | 'contact' }[] = [
+  { path: '/', key: 'home' },
+  { path: '/about', key: 'about' },
+  { path: '/services', key: 'services' },
+  { path: '/portfolio', key: 'portfolio' },
+  { path: '/contact', key: 'contact' },
 ];
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,34 +45,45 @@ const Navbar: React.FC = () => {
           <div className="p-2 bg-primary-600 rounded-lg group-hover:bg-primary-500 transition-colors">
             <Cloud className="w-6 h-6 text-white" />
           </div>
-          <div className="flex flex-col leading-tight">
-            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
-              Gloria Cloud
-            </span>
-            <span className="text-[10px] font-medium text-slate-500 uppercase tracking-wider">Glory to God</span>
-          </div>
+          <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
+            Gloria Cloud
+          </span>
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
+        <div className="hidden md:flex items-center space-x-6">
+          {navItems.map((item) => (
             <Link
-              key={link.name}
-              to={link.path}
+              key={item.path}
+              to={item.path}
               className={`text-base font-medium transition-colors hover:text-primary-600 ${
-                location.pathname === link.path
+                location.pathname === item.path
                   ? 'text-primary-600'
                   : 'text-slate-600'
               }`}
             >
-              {link.name}
+              {t.nav[item.key]}
             </Link>
           ))}
+          <div className="flex items-center gap-2 border-l border-slate-200 pl-4">
+            {(['en', 'ko', 'zh'] as Lang[]).map((lang) => (
+              <button
+                key={lang}
+                type="button"
+                onClick={() => setLanguage(lang)}
+                className={`text-sm font-medium px-2 py-1 rounded transition-colors ${
+                  language === lang ? 'text-primary-600 bg-primary-50' : 'text-slate-500 hover:text-slate-700'
+                }`}
+              >
+                {lang === 'en' ? 'EN' : lang === 'ko' ? 'KO' : '中文'}
+              </button>
+            ))}
+          </div>
           <Link
             to="/contact"
             className="px-5 py-2.5 bg-slate-900 text-white text-base font-medium rounded-full hover:bg-slate-800 transition-all transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
           >
-            Start a Project
+            {t.nav.startProject}
           </Link>
         </div>
 
@@ -87,24 +100,38 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu Dropdown */}
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-xl flex flex-col p-6 space-y-4">
-          {navLinks.map((link) => (
+          {navItems.map((item) => (
             <Link
-              key={link.name}
-              to={link.path}
+              key={item.path}
+              to={item.path}
               className={`text-xl font-medium py-2 border-b border-slate-50 ${
-                location.pathname === link.path
+                location.pathname === item.path
                   ? 'text-primary-600'
                   : 'text-slate-600'
               }`}
             >
-              {link.name}
+              {t.nav[item.key]}
             </Link>
           ))}
+          <div className="flex gap-2 py-2">
+            {(['en', 'ko', 'zh'] as Lang[]).map((lang) => (
+              <button
+                key={lang}
+                type="button"
+                onClick={() => setLanguage(lang)}
+                className={`text-sm font-medium px-3 py-1.5 rounded ${
+                  language === lang ? 'text-primary-600 bg-primary-50' : 'text-slate-500'
+                }`}
+              >
+                {lang === 'en' ? 'EN' : lang === 'ko' ? 'KO' : '中文'}
+              </button>
+            ))}
+          </div>
           <Link
             to="/contact"
             className="w-full text-center px-5 py-3 bg-primary-600 text-white text-lg font-medium rounded-lg hover:bg-primary-700 transition-colors"
           >
-            Start a Project
+            {t.nav.startProject}
           </Link>
         </div>
       )}

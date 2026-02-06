@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Code, Layout, Heart, CheckCircle, Smartphone, Server, Cloud } from 'lucide-react';
+import { ArrowRight, Code, Layout, Heart, Cloud } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -11,6 +12,7 @@ const fadeInUp = {
 };
 
 const Home: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
@@ -28,23 +30,23 @@ const Home: React.FC = () => {
             className="max-w-2xl"
           >
             <div className="inline-block px-4 py-1 bg-primary-100 text-primary-800 rounded-full text-sm font-semibold mb-6">
-              Award-Winning Digital Agency
+              {t.home.heroBadge}
             </div>
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] mb-6">
-              Elevate Your <br />
+              {t.home.heroTitle1} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-accent-600">
-                Digital Presence
+                {t.home.heroTitle2}
               </span>
             </h1>
             <p className="text-xl text-slate-600 mb-8 leading-relaxed max-w-lg">
-              We build beautiful, high-performing websites that captivate your audience and drive real business growth.
+              {t.home.heroDesc}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/contact" className="px-8 py-4 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl text-center">
-                Get Started
+                {t.home.getStarted}
               </Link>
               <Link to="/portfolio" className="px-8 py-4 bg-white text-slate-800 border border-slate-200 rounded-lg font-semibold hover:border-slate-400 transition-all text-center">
-                View Our Work
+                {t.home.viewOurWork}
               </Link>
             </div>
           </motion.div>
@@ -71,19 +73,19 @@ const Home: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-slate-100">
                 <div>
                     <h3 className="text-4xl font-bold text-slate-900 mb-2">500+</h3>
-                    <p className="text-slate-500">Projects Completed</p>
+                    <p className="text-slate-500">{t.home.projectsCompleted}</p>
                 </div>
                 <div>
                     <h3 className="text-4xl font-bold text-slate-900 mb-2">98%</h3>
-                    <p className="text-slate-500">Client Satisfaction</p>
+                    <p className="text-slate-500">{t.home.clientSatisfaction}</p>
                 </div>
                 <div>
                     <h3 className="text-4xl font-bold text-slate-900 mb-2">10+</h3>
-                    <p className="text-slate-500">Years Experience</p>
+                    <p className="text-slate-500">{t.home.yearsExperience}</p>
                 </div>
                 <div>
                     <h3 className="text-4xl font-bold text-slate-900 mb-2">24/7</h3>
-                    <p className="text-slate-500">Support Available</p>
+                    <p className="text-slate-500">{t.home.supportAvailable}</p>
                 </div>
             </div>
         </div>
@@ -93,17 +95,17 @@ const Home: React.FC = () => {
       <section className="py-24 bg-slate-50">
         <div className="container mx-auto px-6 md:px-12">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Our Core Services</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{t.home.coreServices}</h2>
             <p className="text-lg text-slate-600">
-              We offer a full suite of digital services designed to take your business to the next level.
+              {t.home.coreServicesDesc}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { icon: Layout, title: "Website Design", desc: "Custom, responsive designs that reflect your brand identity." },
-              { icon: Code, title: "Web App Development", desc: "Custom web apps built for scale and performance, from responsive frontends to secure backends and APIs, using modern technology stacks." },
-              { icon: Heart, title: "Non-Profit Website Program", desc: "We provide free websites for qualified non-profit organizations so they can reach more people with a professional online presence." },
+              { icon: Layout, title: t.home.websiteDesign, desc: t.home.websiteDesignDesc },
+              { icon: Code, title: t.home.webAppDev, desc: t.home.webAppDevDesc },
+              { icon: Heart, title: t.home.nonProfitProgram, desc: t.home.nonProfitProgramDesc },
             ].map((service, index) => (
               <motion.div 
                 key={index}
@@ -116,7 +118,7 @@ const Home: React.FC = () => {
                 <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
                 <p className="text-slate-600 mb-6">{service.desc}</p>
                 <Link to="/services" className="text-primary-600 font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
-                  Learn more <ArrowRight size={16} />
+                  {t.home.learnMore} <ArrowRight size={16} />
                 </Link>
               </motion.div>
             ))}
@@ -129,17 +131,19 @@ const Home: React.FC = () => {
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <span className="text-primary-600 font-semibold tracking-wide uppercase">Portfolio</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Recent Work</h2>
+              <span className="text-primary-600 font-semibold tracking-wide uppercase">{t.home.portfolioLabel}</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">{t.home.recentWork}</h2>
             </div>
             <Link to="/portfolio" className="hidden md:flex items-center gap-2 text-slate-900 font-medium hover:text-primary-600 transition-colors">
-              View all projects <ArrowRight size={20} />
+              {t.home.viewAllProjects} <ArrowRight size={20} />
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: "Martial Art Demo Website", category: "Website", image: "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=800", url: "https://taekwondodemo-gloriacloud.vercel.app/" },
+              { title: t.home.martialArtDemo, category: t.home.website, image: "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=800", url: "https://taekwondodemo-gloriacloud.vercel.app/" },
+              { title: t.home.nonProfitDemo, category: t.home.nonProfit, image: "https://nonprofitdemo-gloriacloud.vercel.app/images/hero.png", url: "https://nonprofitdemo-gloriacloud.vercel.app/" },
+              { title: t.home.shortLinkApp, category: t.home.webAppDev, image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800", url: "https://shortlinkapp-gloriacloud.vercel.app/" },
             ].map((project, index) => (
               <motion.div 
                 key={index}
@@ -162,7 +166,7 @@ const Home: React.FC = () => {
           
           <div className="mt-8 text-center md:hidden">
              <Link to="/portfolio" className="inline-flex items-center gap-2 text-primary-600 font-medium">
-              View all projects <ArrowRight size={20} />
+              {t.home.viewAllProjects} <ArrowRight size={20} />
             </Link>
           </div>
         </div>
@@ -177,7 +181,7 @@ const Home: React.FC = () => {
 
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.home.whatClientsSay}</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -185,12 +189,12 @@ const Home: React.FC = () => {
                <div className="flex gap-1 text-yellow-400 mb-4">
                  {[1,2,3,4,5].map(i => <div key={i}>★</div>)}
                </div>
-               <p className="text-slate-300 text-lg mb-6 italic">"Gloria Cloud transformed our outdated website into a lead-generating machine. Their attention to detail is unmatched."</p>
+               <p className="text-slate-300 text-lg mb-6 italic">{t.home.testimonial1}</p>
                <div className="flex items-center gap-4">
                  <img src="https://picsum.photos/100/100?random=50" alt="Client" className="w-12 h-12 rounded-full object-cover" />
                  <div>
-                   <h4 className="font-bold">Sarah Johnson</h4>
-                   <p className="text-sm text-slate-400">CEO, TechFlow</p>
+                   <h4 className="font-bold">{t.home.sarahJohnson}</h4>
+                   <p className="text-sm text-slate-400">{t.home.ceoTechFlow}</p>
                  </div>
                </div>
              </div>
@@ -199,12 +203,12 @@ const Home: React.FC = () => {
                <div className="flex gap-1 text-yellow-400 mb-4">
                  {[1,2,3,4,5].map(i => <div key={i}>★</div>)}
                </div>
-               <p className="text-slate-300 text-lg mb-6 italic">"Professional, responsive, and incredibly talented. They understood our vision perfectly and executed it flawlessly."</p>
+               <p className="text-slate-300 text-lg mb-6 italic">{t.home.testimonial2}</p>
                <div className="flex items-center gap-4">
                  <img src="https://picsum.photos/100/100?random=51" alt="Client" className="w-12 h-12 rounded-full object-cover" />
                  <div>
-                   <h4 className="font-bold">Michael Chen</h4>
-                   <p className="text-sm text-slate-400">Director, Chen Realty</p>
+                   <h4 className="font-bold">{t.home.michaelChen}</h4>
+                   <p className="text-sm text-slate-400">{t.home.directorChen}</p>
                  </div>
                </div>
              </div>
@@ -215,12 +219,12 @@ const Home: React.FC = () => {
       {/* CTA Banner */}
       <section className="py-20 bg-primary-600">
         <div className="container mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to start your project?</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{t.home.readyToStart}</h2>
           <p className="text-primary-100 text-xl mb-10 max-w-2xl mx-auto">
-            Let's create something amazing together. Schedule a free consultation today.
+            {t.home.ctaDesc}
           </p>
           <Link to="/contact" className="inline-block px-10 py-4 bg-white text-primary-700 font-bold rounded-full hover:bg-slate-100 transition-colors shadow-xl">
-            Let's Talk
+            {t.home.letsTalk}
           </Link>
         </div>
       </section>

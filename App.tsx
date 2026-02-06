@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { LanguageProvider } from './contexts/LanguageContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -21,6 +22,7 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
   return (
+    <LanguageProvider>
     <BrowserRouter>
       <ScrollToTop />
       <div className="flex flex-col min-h-screen font-sans">
@@ -37,6 +39,7 @@ const App: React.FC = () => {
         <Footer />
       </div>
     </BrowserRouter>
+    </LanguageProvider>
   );
 };
 
