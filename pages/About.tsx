@@ -15,10 +15,10 @@ const About: React.FC = () => {
           >
             About Gloria Cloud
           </motion.h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-4">
+          <p className="text-xl max-w-2xl mx-auto mb-4" style={{ color: '#cbd5e1' }}>
             We are an AI-driven digital agency—passionate about design and development, and dedicated to making the web a more beautiful and functional place.
           </p>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: '#cbd5e1' }}>
             As a Christian-owned agency, Gloria Cloud exists to glorify God—we do our work with excellence and integrity, serving our clients as an offering of faith.
           </p>
         </div>
