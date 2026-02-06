@@ -6,23 +6,23 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-8">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12 items-start">
           {/* Brand Info */}
-          <div>
+          <div className="min-w-0">
             <Link to="/" className="flex items-center gap-2 mb-6 group inline-flex" title="Gloria — Glory to God">
-              <Cloud className="w-6 h-6 text-primary-500" />
+              <Cloud className="w-6 h-6 text-primary-500 shrink-0" />
               <div className="flex flex-col leading-tight">
                 <span className="text-2xl font-bold text-white">Gloria Cloud</span>
                 <span className="text-[10px] font-medium text-primary-400/90 uppercase tracking-wider">Glory to God</span>
               </div>
             </Link>
-            <p className="text-slate-400 mb-6 leading-relaxed">
-              We craft exceptional digital experiences that merge beauty with functionality. As a Christian-owned agency, we aim to glorify God through excellent work and service to our clients.
+            <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
+              We craft exceptional digital experiences and aim to glorify God through excellent work for our clients.
             </p>
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="min-w-0">
             <h3 className="text-lg font-semibold text-white mb-6">Quick Links</h3>
             <ul className="space-y-3">
               <li><Link to="/about" className="hover:text-primary-400 transition-colors">About Us</Link></li>
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="min-w-0">
             <h3 className="text-lg font-semibold text-white mb-6">Services</h3>
             <ul className="space-y-3">
               <li className="hover:text-primary-400 transition-colors cursor-pointer">Website Design</li>
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Contact Info */}
-          <div>
+          <div className="min-w-0">
             <h3 className="text-lg font-semibold text-white mb-6">Get in Touch</h3>
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
