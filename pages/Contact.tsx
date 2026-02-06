@@ -1,17 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Phone, Send } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
+const IFRAME_NAME = 'contact-form-response';
+
 const Contact: React.FC = () => {
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const { t } = useLanguage();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    const onMessage = (event: MessageEvent) => {
+      const data = event.data;
+      if (data && typeof data === 'object' && 'success' in data) {
+        setFormStatus(data.success ? 'success' : 'error');
+      }
+    };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const scriptUrl = (import.meta.env.VITE_APP_SCRIPT_URL || '').trim();
+    if (!scriptUrl) {
+      setFormStatus('error');
+      return;
+    }
+    const form = e.currentTarget;
+    form.setAttribute('action', scriptUrl);
+    form.setAttribute('target', IFRAME_NAME);
     setFormStatus('submitting');
-    setTimeout(() => {
-      setFormStatus('success');
-    }, 1500);
+    form.submit();
   };
 
   return (
@@ -53,7 +72,17 @@ const Contact: React.FC = () => {
 
           {/* Form */}
           <div className="p-10 lg:w-2/3">
-            {formStatus === 'success' ? (
+            {formStatus === 'error' ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-20">
+                <p className="text-slate-600 mb-6">{t.contact.errorSending}</p>
+                <button
+                  onClick={() => setFormStatus('idle')}
+                  className="px-8 py-4 bg-slate-900 text-white font-bold rounded-lg hover:bg-slate-800 transition-colors"
+                >
+                  {t.contact.tryAgain}
+                </button>
+              </div>
+            ) : formStatus === 'success' ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-20">
                 <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
                   <Send className="w-10 h-10 text-green-600" />
@@ -68,36 +97,38 @@ const Contact: React.FC = () => {
                 </button>
               </div>
             ) : (
+              <>
+              <iframe name={IFRAME_NAME} title="Form response" className="hidden" aria-hidden />
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">{t.contact.firstName}</label>
-                    <input required type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderFirst} />
+                    <input name="firstName" required type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderFirst} />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">{t.contact.lastName}</label>
-                    <input required type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderLast} />
+                    <input name="lastName" required type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderLast} />
                   </div>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">{t.contact.emailAddress}</label>
-                  <input required type="email" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderEmail} />
+                  <input name="email" required type="email" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderEmail} />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">{t.contact.serviceInterested}</label>
-                  <select className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all bg-white">
-                    <option>{t.footer.websiteDesign}</option>
-                    <option>{t.footer.webAppDev}</option>
-                    <option>{t.footer.nonProfitProgram}</option>
-                    <option>{t.contact.other}</option>
+                  <select name="service" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all bg-white">
+                    <option value={t.footer.websiteDesign}>{t.footer.websiteDesign}</option>
+                    <option value={t.footer.webAppDev}>{t.footer.webAppDev}</option>
+                    <option value={t.footer.nonProfitProgram}>{t.footer.nonProfitProgram}</option>
+                    <option value={t.contact.other}>{t.contact.other}</option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">{t.contact.message}</label>
-                  <textarea required rows={5} className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderMessage}></textarea>
+                  <textarea name="message" required rows={5} className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderMessage}></textarea>
                 </div>
 
                 <button 
@@ -109,6 +140,7 @@ const Contact: React.FC = () => {
                   {formStatus !== 'submitting' && <Send size={18} />}
                 </button>
               </form>
+              </>
             )}
           </div>
         </div>

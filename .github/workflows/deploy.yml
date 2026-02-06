@@ -23,7 +23,10 @@ jobs:
           node-version: 20
           cache: 'npm'
 
+      # APP_SCRIPT_URL secret = Google Apps Script web app URL (same as .env.local) so contact form works on GitHub Pages
       - name: Install and Build 🔧
+        env:
+          VITE_APP_SCRIPT_URL: ${{ secrets.APP_SCRIPT_URL }}
         run: |
           npm install
           npm run build

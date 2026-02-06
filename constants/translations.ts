@@ -128,6 +128,8 @@ export const translations = {
       placeholderMessage: 'How can we help? Share your goals or questions...',
       sendMessage: 'Send Message',
       sending: 'Sending...',
+      errorSending: 'Something went wrong. Please try again or email us directly.',
+      tryAgain: 'Try again',
     },
     footer: {
       brandDesc: 'We craft exceptional digital experiences and aim to glorify God through excellent work for our clients.',
@@ -271,6 +273,8 @@ export const translations = {
       placeholderMessage: '어떻게 도와드릴까요? 목표나 질문을 알려 주세요.',
       sendMessage: '메시지 보내기',
       sending: '전송 중...',
+      errorSending: '전송에 실패했습니다. 다시 시도하거나 이메일로 연락해 주세요.',
+      tryAgain: '다시 시도',
     },
     footer: {
       brandDesc: '아름다움과 기능을 겸비한 탁월한 디지털 경험을 만들며, 탁월한 작업과 고객 섬김으로 하나님께 영광을 돌리고자 합니다.',
@@ -414,6 +418,8 @@ export const translations = {
       placeholderMessage: '需要我们如何帮助？分享您的目标或问题...',
       sendMessage: '发送消息',
       sending: '发送中...',
+      errorSending: '发送失败，请重试或直接给我们发邮件。',
+      tryAgain: '重试',
     },
     footer: {
       brandDesc: '我们打造融合美感与功能的卓越数字体验，作为基督徒创办的 agency，我们通过卓越工作和客户服务荣耀神。',
