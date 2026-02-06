@@ -38,14 +38,17 @@ const Navbar: React.FC = () => {
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
+        {/* Logo — Gloria = Glory to God */}
+        <Link to="/" className="flex items-center gap-2 group" title="Gloria — Glory to God">
           <div className="p-2 bg-primary-600 rounded-lg group-hover:bg-primary-500 transition-colors">
             <Cloud className="w-6 h-6 text-white" />
           </div>
-          <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
-            Gloria Cloud
-          </span>
+          <div className="flex flex-col leading-tight">
+            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
+              Gloria Cloud
+            </span>
+            <span className="text-[10px] font-medium text-slate-500 uppercase tracking-wider">Glory to God</span>
+          </div>
         </Link>
 
         {/* Desktop Menu */}
@@ -54,7 +57,7 @@ const Navbar: React.FC = () => {
             <Link
               key={link.name}
               to={link.path}
-              className={`text-sm font-medium transition-colors hover:text-primary-600 ${
+              className={`text-base font-medium transition-colors hover:text-primary-600 ${
                 location.pathname === link.path
                   ? 'text-primary-600'
                   : 'text-slate-600'
@@ -65,7 +68,7 @@ const Navbar: React.FC = () => {
           ))}
           <Link
             to="/contact"
-            className="px-5 py-2.5 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-800 transition-all transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+            className="px-5 py-2.5 bg-slate-900 text-white text-base font-medium rounded-full hover:bg-slate-800 transition-all transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
           >
             Start a Project
           </Link>
@@ -88,7 +91,7 @@ const Navbar: React.FC = () => {
             <Link
               key={link.name}
               to={link.path}
-              className={`text-lg font-medium py-2 border-b border-slate-50 ${
+              className={`text-xl font-medium py-2 border-b border-slate-50 ${
                 location.pathname === link.path
                   ? 'text-primary-600'
                   : 'text-slate-600'
@@ -99,7 +102,7 @@ const Navbar: React.FC = () => {
           ))}
           <Link
             to="/contact"
-            className="w-full text-center px-5 py-3 bg-primary-600 text-white text-base font-medium rounded-lg hover:bg-primary-700 transition-colors"
+            className="w-full text-center px-5 py-3 bg-primary-600 text-white text-lg font-medium rounded-lg hover:bg-primary-700 transition-colors"
           >
             Start a Project
           </Link>

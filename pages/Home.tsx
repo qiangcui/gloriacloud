@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Code, Layout, TrendingUp, CheckCircle, Smartphone, Server, Cloud } from 'lucide-react';
+import { ArrowRight, Code, Layout, Heart, CheckCircle, Smartphone, Server, Cloud } from 'lucide-react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -101,9 +101,9 @@ const Home: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { icon: Layout, title: "Web Design", desc: "Custom, responsive designs that reflect your brand identity." },
-              { icon: TrendingUp, title: "SEO & Growth", desc: "Strategies to increase visibility and drive organic traffic." },
-              { icon: Code, title: "Development", desc: "Robust, scalable code built on modern technology stacks." },
+              { icon: Layout, title: "Website Design", desc: "Custom, responsive designs that reflect your brand identity." },
+              { icon: Code, title: "Web App Development", desc: "Custom web apps built for scale and performance, from responsive frontends to secure backends and APIs, using modern technology stacks." },
+              { icon: Heart, title: "Non-Profit Website Program", desc: "We provide free websites for qualified non-profit organizations so they can reach more people with a professional online presence." },
             ].map((service, index) => (
               <motion.div 
                 key={index}
@@ -138,20 +138,23 @@ const Home: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
+            {[
+              { title: "Martial Art Demo Website", category: "Website", image: "https://images.unsplash.com/photo-1555597673-b21d5c935865?w=800", url: "https://taekwondodemo-gloriacloud.vercel.app/" },
+            ].map((project, index) => (
               <motion.div 
-                key={item}
+                key={index}
                 {...fadeInUp}
                 className="group relative overflow-hidden rounded-xl aspect-[4/3] cursor-pointer"
+                onClick={() => project.url && window.open(project.url, '_blank', 'noopener,noreferrer')}
               >
                 <img 
-                  src={`https://picsum.photos/600/450?random=${item + 20}`} 
-                  alt="Project Thumbnail" 
+                  src={project.image} 
+                  alt={project.title} 
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                  <span className="text-primary-400 font-medium mb-1">Web Development</span>
-                  <h3 className="text-white text-xl font-bold">Project Name {item}</h3>
+                  <span className="text-primary-400 font-medium mb-1">{project.category}</span>
+                  <h3 className="text-white text-xl font-bold">{project.title}</h3>
                 </div>
               </motion.div>
             ))}

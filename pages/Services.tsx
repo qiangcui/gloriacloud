@@ -1,44 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Layout, Search, PenTool, Server, ShieldCheck, Smartphone } from 'lucide-react';
+import { Layout, Smartphone, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const servicesList = [
   {
     icon: Layout,
-    title: "Custom Web Design",
+    title: "Custom Website Design",
     description: "Tailor-made designs that capture your brand's essence. We focus on UI/UX best practices to convert visitors into customers.",
     features: ["Responsive Layouts", "Interactive Prototypes", "Design Systems"]
   },
   {
-    icon: Search,
-    title: "SEO Optimization",
-    description: "Climb the search rankings. We implement technical SEO, keyword strategies, and content optimization to get you seen.",
-    features: ["On-Page SEO", "Speed Optimization", "Analytics Setup"]
-  },
-  {
-    icon: PenTool,
-    title: "Branding & Identity",
-    description: "More than just a logo. We create cohesive visual identities that tell your story across all mediums.",
-    features: ["Logo Design", "Brand Guidelines", "Visual Assets"]
-  },
-  {
-    icon: Server,
-    title: "Hosting & Maintenance",
-    description: "Peace of mind. Secure hosting and regular updates ensure your site is always up, running, and secure.",
-    features: ["Daily Backups", "Security Patches", "99.9% Uptime"]
-  },
-  {
     icon: Smartphone,
-    title: "App Development",
+    title: "Web App Development",
     description: "Need more than a website? We build progressive web apps and mobile interfaces for complex functionality.",
     features: ["React / React Native", "Cross-platform", "API Integration"]
   },
   {
-    icon: ShieldCheck,
-    title: "Technical Audits",
-    description: "Identify bottlenecks. We analyze your existing digital infrastructure and provide actionable roadmaps for improvement.",
-    features: ["Code Review", "Security Audit", "Performance Report"]
+    icon: Heart,
+    title: "Non-Profit Website Program",
+    description: "We offer free website design for qualified non-profit organizations. Help your cause reach more people with a professional online presence.",
+    features: ["No cost for eligible non-profits", "Professional design", "Ongoing support"]
   }
 ];
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, Send } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
@@ -36,30 +36,17 @@ const Contact: React.FC = () => {
                   <Mail className="w-6 h-6 opacity-80 mt-1" />
                   <div>
                     <p className="text-sm opacity-70 mb-1">Email</p>
-                    <p className="font-medium">hello@gloriacloud.com</p>
+                    <p className="font-medium">gloriacloudco@gmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <Phone className="w-6 h-6 opacity-80 mt-1" />
                   <div>
                     <p className="text-sm opacity-70 mb-1">Phone</p>
-                    <p className="font-medium">+1 (555) 123-4567</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <MapPin className="w-6 h-6 opacity-80 mt-1" />
-                  <div>
-                    <p className="text-sm opacity-70 mb-1">Office</p>
-                    <p className="font-medium">123 Innovation Dr<br/>Tech Valley, CA 94043</p>
+                    <p className="font-medium">(303) 257-2959</p>
                   </div>
                 </div>
               </div>
-            </div>
-            
-            <div className="mt-12">
-               <div className="w-full h-48 bg-primary-700 rounded-xl opacity-50 flex items-center justify-center">
-                  <span className="text-sm font-medium">Map Integration Placeholder</span>
-               </div>
             </div>
           </div>
 
@@ -84,33 +71,32 @@ const Contact: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">First Name</label>
-                    <input required type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder="John" />
+                    <input required type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder="Your first name" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">Last Name</label>
-                    <input required type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder="Doe" />
+                    <input required type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder="Your last name" />
                   </div>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
-                  <input required type="email" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder="john@company.com" />
+                  <input required type="email" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder="your@email.com" />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Service Interested In</label>
                   <select className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all bg-white">
-                    <option>Web Design</option>
-                    <option>Development</option>
-                    <option>SEO & Marketing</option>
-                    <option>Maintenance</option>
+                    <option>Website Design</option>
+                    <option>Web App Development</option>
+                    <option>Non-Profit Website Program</option>
                     <option>Other</option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Message</label>
-                  <textarea required rows={5} className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder="Tell us about your project..."></textarea>
+                  <textarea required rows={5} className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder="How can we help? Share your goals or questions..."></textarea>
                 </div>
 
                 <button 
