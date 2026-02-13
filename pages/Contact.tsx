@@ -2,16 +2,43 @@ import React, { useState } from 'react';
 import { Mail, Phone, Send } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
+const SCRIPT_URL = import.meta.env.VITE_APP_SCRIPT_URL as string | undefined;
+
 const Contact: React.FC = () => {
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const { t } = useLanguage();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!SCRIPT_URL) {
+      setFormStatus('error');
+      setErrorMessage('Form endpoint is not configured.');
+      return;
+    }
+    const form = e.currentTarget;
+    const formData = {
+      firstName: (form.querySelector('[name="firstName"]') as HTMLInputElement)?.value?.trim() ?? '',
+      lastName: (form.querySelector('[name="lastName"]') as HTMLInputElement)?.value?.trim() ?? '',
+      email: (form.querySelector('[name="email"]') as HTMLInputElement)?.value?.trim() ?? '',
+      service: (form.querySelector('[name="service"]') as HTMLSelectElement)?.value?.trim() ?? '',
+      message: (form.querySelector('[name="message"]') as HTMLTextAreaElement)?.value?.trim() ?? '',
+    };
     setFormStatus('submitting');
-    setTimeout(() => {
+    setErrorMessage('');
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: new URLSearchParams(formData),
+        mode: 'no-cors',
+      });
+      // With no-cors we can't read the response; assume success if no error
       setFormStatus('success');
-    }, 1500);
+      form.reset();
+    } catch (err) {
+      setFormStatus('error');
+      setErrorMessage('Failed to send. Please try again or email us directly.');
+    }
   };
 
   return (
@@ -72,33 +99,38 @@ const Contact: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">{t.contact.firstName}</label>
-                    <input required type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderFirst} />
+                    <input required name="firstName" type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderFirst} />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">{t.contact.lastName}</label>
-                    <input required type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderLast} />
+                    <input required name="lastName" type="text" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderLast} />
                   </div>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">{t.contact.emailAddress}</label>
-                  <input required type="email" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderEmail} />
+                  <input required name="email" type="email" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderEmail} />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">{t.contact.serviceInterested}</label>
-                  <select className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all bg-white">
-                    <option>{t.footer.websiteDesign}</option>
-                    <option>{t.footer.webAppDev}</option>
-                    <option>{t.footer.nonProfitProgram}</option>
-                    <option>{t.contact.other}</option>
+                  <select name="service" className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all bg-white">
+                    <option value={t.footer.websiteDesign}>{t.footer.websiteDesign}</option>
+                    <option value={t.footer.webAppDev}>{t.footer.webAppDev}</option>
+                    <option value={t.footer.nonProfitProgram}>{t.footer.nonProfitProgram}</option>
+                    <option value={t.contact.other}>{t.contact.other}</option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">{t.contact.message}</label>
-                  <textarea required rows={5} className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderMessage}></textarea>
+                  <textarea required name="message" rows={5} className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder={t.contact.placeholderMessage}></textarea>
                 </div>
+                {formStatus === 'error' && (
+                  <div className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-800 text-sm">
+                    {errorMessage}
+                  </div>
+                )}
 
                 <button 
                   type="submit" 
