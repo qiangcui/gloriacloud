@@ -3,15 +3,24 @@ import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import fs from 'fs';
 
-// Copy index.html to 404.html for GitHub Pages SPA fallback (fixes refresh 404)
-function copy404Plugin() {
+// GitHub Pages SPA: 404.html + route folders so /contact, /about, etc. serve index and return 200
+const SPA_ROUTES = ['contact', 'about', 'services', 'portfolio'];
+
+function githubPagesSpaPlugin() {
   return {
-    name: 'copy-404',
+    name: 'github-pages-spa',
     closeBundle() {
-      const dest = path.resolve(__dirname, 'dist/404.html');
-      const src = path.resolve(__dirname, 'dist/index.html');
-      if (fs.existsSync(src)) {
-        fs.copyFileSync(src, dest);
+      const dist = path.resolve(__dirname, 'dist');
+      const indexPath = path.join(dist, 'index.html');
+      if (!fs.existsSync(indexPath)) return;
+      const indexHtml = fs.readFileSync(indexPath, 'utf-8');
+      // 404 fallback for any other path
+      fs.writeFileSync(path.join(dist, '404.html'), indexHtml);
+      // Each route as path/index.html so /contact etc. return 200
+      for (const route of SPA_ROUTES) {
+        const dir = path.join(dist, route);
+        fs.mkdirSync(dir, { recursive: true });
+        fs.writeFileSync(path.join(dir, 'index.html'), indexHtml);
       }
     },
   };
@@ -24,7 +33,7 @@ export default defineConfig(({ mode }) => {
         port: 5173,
         host: '0.0.0.0',
       },
-      plugins: [react(), copy404Plugin()],
+      plugins: [react(), githubPagesSpaPlugin()],
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
